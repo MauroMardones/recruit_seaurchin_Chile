@@ -2,7 +2,7 @@
 title: "Indice de Reclutamiento  Erizo X y XI regiones "
 subtitle: "Análisis complementario Seguimiento Bentónico 1996-2022"
 author: "Mauricio Mardones. Inv. Depto Ev. Recursos. IFOP"
-date:  "`r format(Sys.time(), '%d %B, %Y')`"
+date:  "06 October, 2023"
 #bibliography: LBSPR.bib
 #csl: apa.csl
 link-citations: yes
@@ -30,7 +30,8 @@ editor_options:
 
 # Set de trabajo y librerías utilizadas
 
-```{r setup}
+
+```r
 rm(list = ls())
 knitr::opts_chunk$set(message = FALSE,
                       warning = FALSE,
@@ -43,11 +44,11 @@ knitr::opts_chunk$set(message = FALSE,
 options(bitmapType = "cairo") 
 # (https://github.com/tidyverse/ggplot2/issues/2655)
 # Lo mapas se hacen mas rapido
-                      
 ```
 
 
-```{r Xquarz_bug}
+
+```r
 options(bitmapType = "cairo") 
 #XQuartz is a mess, put this in your onload to default to cairo instead (https://github.com/tidyverse/ggplot2/issues/2655)
 # Lo mapas se hacen mas rapido
@@ -55,7 +56,8 @@ options(bitmapType = "cairo")
 ```
 
 
-```{r error=F}
+
+```r
 library(GGally)
 library(knitr)
 library(tidyverse)
@@ -79,15 +81,16 @@ library(see)
 
 # Tallas estaciones fijas
 
-```{r}
 
+```r
 EstFij <- read_csv2("Talla_EstFi_20011_2018.csv")
 EstFij2 <- as.data.frame(EstFij)
 ```
 
 ## Exploración
 
-```{r message=FALSE, warning=FALSE}
+
+```r
 jz3 <- ggplot(EstFij2 %>% 
                 drop_na(), aes(x=talla_mm, y = as.factor(year), 
                       fill = factor(stat(quantile))))+
@@ -110,9 +113,12 @@ jz3 <- ggplot(EstFij2 %>%
   ylab("")
 jz3
 ```
+
+<img src="Figuras/unnamed-chunk-3-1.jpeg" style="display: block; margin: auto;" />
 Lo mismo por poligono
 
-```{r, message=FALSE, warning=FALSE}
+
+```r
 jz4 <- ggplot(EstFij2 %>% 
                 drop_na(), aes(x=talla_mm, y = as.factor(year), 
                       fill = factor(stat(quantile))))+
@@ -137,9 +143,12 @@ jz4 <- ggplot(EstFij2 %>%
   ylab("")
 jz4
 ```
+
+<img src="Figuras/unnamed-chunk-4-1.jpeg" style="display: block; margin: auto;" />
 Lo mismo por zona
 
-```{r message=FALSE, warning=FALSE}
+
+```r
 jz5 <- ggplot(EstFij2 %>% 
                 drop_na(), aes(x=talla_mm, y = as.factor(year), 
                       fill = factor(stat(quantile))))+
@@ -165,9 +174,12 @@ jz5 <- ggplot(EstFij2 %>%
   ylab("")
 jz5
 ```
+
+<img src="Figuras/unnamed-chunk-5-1.jpeg" style="display: block; margin: auto;" />
 Calculo cuantiles por grupo
 
-```{r}
+
+```r
 # Calcular cuantiles por grupo
 cuantiles_por_zona <- tapply(EstFij2$talla_mm, 
                               EstFij2$macrozona,
@@ -180,8 +192,100 @@ cuantiles_por_año <- tapply(EstFij2$talla_mm,
                               function(x) quantile(x, c(0.10, 0.5, 0.90)))
 
 print(cuantiles_por_zona)
+```
+
+```
+## $`X Norte`
+## 10% 50% 90% 
+##  22  45  63 
+## 
+## $`X Sur`
+## 10% 50% 90% 
+##  21  38  57 
+## 
+## $XI
+## 10% 50% 90% 
+##  23  46  66
+```
+
+```r
 print(cuantiles_por_poligono)
+```
+
+```
+## $`1`
+## 10% 50% 90% 
+##  20  34  53 
+## 
+## $`2`
+## 10% 50% 90% 
+##  33  55  66 
+## 
+## $`4`
+##  10%  50%  90% 
+## 16.0 28.5 54.0 
+## 
+## $`5`
+## 10% 50% 90% 
+##  18  38  57 
+## 
+## $`6`
+## 10% 50% 90% 
+##  24  39  57 
+## 
+## $`7`
+## 10% 50% 90% 
+##  26  50  67 
+## 
+## $`8`
+## 10% 50% 90% 
+##  24  41  63 
+## 
+## $`11`
+##  10%  50%  90% 
+## 21.0 32.0 62.4 
+## 
+## $`12`
+## 10% 50% 90% 
+##  19  39  65
+```
+
+```r
 print(cuantiles_por_año)
+```
+
+```
+## $`2011`
+## 10% 50% 90% 
+##  41  58  70 
+## 
+## $`2012`
+## 10% 50% 90% 
+##  23  32  51 
+## 
+## $`2013`
+## 10% 50% 90% 
+##  20  41  63 
+## 
+## $`2014`
+## 10% 50% 90% 
+##  15  31  57 
+## 
+## $`2015`
+## 10% 50% 90% 
+##  19  33  55 
+## 
+## $`2016`
+## 10% 50% 90% 
+##  24  46  63 
+## 
+## $`2017`
+## 10% 50% 90% 
+##  28  45  63 
+## 
+## $`2018`
+## 10% 50% 90% 
+##  22  40  61
 ```
 
 
@@ -190,20 +294,27 @@ Una vez definidos los quantiles de los muestreos poblacionales (Estaciones Fijas
 
 Calculo el promedio del cuantil `90` por zona.
 
-```{r}
+
+```r
 mean(54, 38, 46)
+```
+
+```
+## [1] 54
 ```
 
 # Calculo Indice Reclutamiento
 
 ## Tallas Seguimiento
 
-```{r}
+
+```r
 load("talla2022.Rdata")
 ```
 
 
-```{r warning=FALSE}
+
+```r
 talla2022exp <- talla2022 %>% 
   drop_na() %>% 
   type.convert(as.is = TRUE) %>% 
@@ -212,7 +323,17 @@ talla2022exp <- talla2022 %>%
 colSums(is.na(talla2022exp))
 ```
 
-```{r message=FALSE, warning=FALSE}
+```
+##        PROCED      POLIGONO POLIGONO_IFOP             X        REGION 
+##             0             0             0             0             0 
+##        PUERTO       ANO_ARR       MES_ARR       DIA_ARR       FUNCION 
+##             0             0             0             0             0 
+##       CAPTURA       DESTINO        PESO_M      LONGITUD          ZONA 
+##             0             0             0             0             0
+```
+
+
+```r
 tallasegpo <- ggplot(talla2022exp %>% 
                 drop_na(), aes(x=LONGITUD, y = as.factor(ANO_ARR), 
                       fill = factor(stat(quantile))))+
@@ -236,18 +357,22 @@ tallasegpo <- ggplot(talla2022exp %>%
 tallasegpo
 ```
 
+<img src="Figuras/unnamed-chunk-10-1.jpeg" style="display: block; margin: auto;" />
+
 
 El promedio de un 10% de los quantiles de entrada a la fracción explotable es de `56 mm`.
 
 Ahora identifico los distintos cuantiles de los datos de pesquería y estaciones
 
-```{r warning=FALSE}
+
+```r
 cuantil_10pesq <- quantile(talla2022exp$LONGITUD, 0.10)
 cuantil_10est <- quantile(EstFij2$talla_mm, 0.90)
 ```
 
 
-```{r warning=FALSE}
+
+```r
 indice_reclutamiento <- talla2022exp %>%
   filter(LONGITUD<cuantil_10est) %>% 
   group_by(ANO_ARR, MES_ARR, POLIGONO, ZONA, POLIGONO_IFOP) %>%
@@ -256,7 +381,8 @@ indice_reclutamiento <- talla2022exp %>%
 # Crear gráficos en facet_wrap de barras para representar el índice de reclutamiento
 ```
 Veo los datos crudos  con la linea como media del cuantil de los datos
-```{r warning=FALSE}
+
+```r
 indseg <- ggplot(indice_reclutamiento , 
        aes(x = factor(ANO_ARR), 
            y = PROP)) +
@@ -271,8 +397,11 @@ indseg <- ggplot(indice_reclutamiento ,
 indseg
 ```
 
+<img src="Figuras/unnamed-chunk-13-1.jpeg" style="display: block; margin: auto;" />
+
 Veo los datos normalizados con la linea como media del cuantil de los datos
-```{r warning=FALSE}
+
+```r
 indseg2 <- ggplot(indice_reclutamiento , 
        aes(x = factor(ANO_ARR), 
            y = PROPLOG)) +
@@ -288,9 +417,12 @@ indseg2 <- ggplot(indice_reclutamiento ,
 indseg2
 ```
 
+<img src="Figuras/unnamed-chunk-14-1.jpeg" style="display: block; margin: auto;" />
+
 ahora estandarizo los datos entre -1 y 1.
 
-```{r warning=FALSE}
+
+```r
 a <- -1  # Límite inferior del rango objetivo
 b <- 1   # Límite superior del rango objetivo
 
@@ -303,7 +435,8 @@ indice_reclutamiento$PROPLOG2 <- ((indice_reclutamiento$PROPLOG- min_x) / (max_x
 ```
 
 
-```{r warning=FALSE, message=FALSE}
+
+```r
 indseg3 <- ggplot(indice_reclutamiento  %>% 
   group_by(ANO_ARR,POLIGONO) %>%
   summarise(PROPLOG3=mean(PROPLOG2)), 
@@ -323,13 +456,14 @@ indseg3 <- ggplot(indice_reclutamiento  %>%
         y = "Índice de Reclutamiento")+
   coord_flip()
 indseg3
-
-
 ```
+
+<img src="Figuras/unnamed-chunk-16-1.jpeg" style="display: block; margin: auto;" />
 
 Grafico como Oscilación por ppoligono
 
-```{r}
+
+```r
 recosc <- ggplot(indice_reclutamiento %>% 
                      group_by(ANO_ARR, POLIGONO, ZONA ) %>%
                     summarise(PROPLOG3=mean(PROPLOG2)), 
@@ -351,12 +485,14 @@ recosc <- ggplot(indice_reclutamiento %>%
   theme_few()+
   theme(axis.text.x = element_text(angle = 90, hjust = 2))
 recosc
-
 ```
+
+<img src="Figuras/unnamed-chunk-17-1.jpeg" style="display: block; margin: auto;" />
 
 Grafico como Oscilación por Zona
 
-```{r message=F, warning=F}
+
+```r
 recosczo <- ggplot(indice_reclutamiento %>% 
                      group_by(ANO_ARR, ZONA, MES_ARR ) %>%
                     summarise(PROPLOG3=mean(PROPLOG2)), 
@@ -378,8 +514,9 @@ recosczo <- ggplot(indice_reclutamiento %>%
   theme_few()+
   theme(axis.text.x = element_text(angle = 90, hjust = 2))
 recosczo
-
 ```
+
+<img src="Figuras/unnamed-chunk-18-1.jpeg" style="display: block; margin: auto;" />
 
 ## Tallas estaciones Fijas
 
