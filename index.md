@@ -709,6 +709,37 @@ indref3
 ```
 
 <img src="Figuras/unnamed-chunk-28-1.jpeg" style="display: block; margin: auto;" />
+Por poligono polar
+
+
+```r
+indref3 <- ggplot(indice_recl_ref  %>% 
+  group_by(year,poligono) %>%
+  summarise(PROPLOG3=mean(PROPLOG2)), 
+       aes(x = factor(year), 
+           y = PROPLOG3,
+           fill=PROPLOG3 > 0)) +
+  geom_bar(stat = "identity")  +
+  scale_fill_manual(values = c("black", "red"),
+                    labels = c("Negativo", "Positivo"),
+                    name="IR Erizo REF") +
+  facet_wrap(.~poligono, ncol=4) +
+  geom_hline(yintercept = 0, color = "red")+
+  scale_x_discrete(breaks = seq(from = 1996, 
+                                to = 2022, by = 1))+
+  theme_void()+
+  labs(x = "ANO", 
+        y = "Índice de Reclutamiento")+
+   geom_text(aes(label = year, y=1.2), 
+             color="black",
+             size=1.2)+ 
+  coord_polar(theta = "x",
+              start = 0)
+indref3
+```
+
+<img src="Figuras/unnamed-chunk-29-1.jpeg" style="display: block; margin: auto;" />
+
 Por sector
 
 
@@ -734,7 +765,38 @@ indref3 <- ggplot(indice_recl_ref  %>%
 indref3
 ```
 
-<img src="Figuras/unnamed-chunk-29-1.jpeg" style="display: block; margin: auto;" />
+<img src="Figuras/unnamed-chunk-30-1.jpeg" style="display: block; margin: auto;" />
+Por sector polar
+
+
+```r
+indref3 <- ggplot(indice_recl_ref  %>% 
+  group_by(year,sector) %>%
+  summarise(PROPLOG3=mean(PROPLOG2)), 
+       aes(x = factor(year), 
+           y = PROPLOG3,
+           fill=PROPLOG3 > 0)) +
+  geom_bar(stat = "identity")  +
+  scale_fill_manual(values = c("black", "red"),
+                    labels = c("Negativo", "Positivo"),
+                    name="IR Erizo REF") +
+  facet_wrap(.~sector, ncol=7) +
+  geom_hline(yintercept = 0, color = "red")+
+  scale_x_discrete(breaks = seq(from = 1996, 
+                                to = 2022, by = 1))+
+  theme_void()+
+  labs(x = "ANO", 
+        y = "Índice de Reclutamiento")+
+      geom_text(aes(label = year, y=1.2), 
+             color="black",
+             size=1.2)+ 
+  coord_polar(theta = "x",
+              start = 0)
+indref3
+```
+
+<img src="Figuras/unnamed-chunk-31-1.jpeg" style="display: block; margin: auto;" />
+
 Grafico como Oscilación por ppoligono
 
 
@@ -762,7 +824,7 @@ recoscref <-ggplot(indice_recl_ref  %>%
 recoscref
 ```
 
-<img src="Figuras/unnamed-chunk-30-1.jpeg" style="display: block; margin: auto;" />
+<img src="Figuras/unnamed-chunk-32-1.jpeg" style="display: block; margin: auto;" />
 Grafico como Oscilación por sector
 
 
@@ -790,7 +852,7 @@ recoscref <-ggplot(indice_recl_ref  %>%
 recoscref
 ```
 
-<img src="Figuras/unnamed-chunk-31-1.jpeg" style="display: block; margin: auto;" />
+<img src="Figuras/unnamed-chunk-33-1.jpeg" style="display: block; margin: auto;" />
 Grafico como Oscilación por Zona
 
 
@@ -818,7 +880,7 @@ recosczoref <- ggplot(indice_recl_ref  %>%
 recosczoref
 ```
 
-<img src="Figuras/unnamed-chunk-32-1.jpeg" style="display: block; margin: auto;" />
+<img src="Figuras/unnamed-chunk-34-1.jpeg" style="display: block; margin: auto;" />
 
 
 # Indicadores:
