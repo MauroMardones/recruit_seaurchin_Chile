@@ -270,6 +270,12 @@ tallasegpo
 
 El promedio de un 10% de los quantiles de entrada a la fracción explotable es de `56 mm`.
 
+Esto corrsponde a un rango de edades entre 1.5 y 2 años como idica la Figure \@ref(fig:Figure1).
+
+```{r Figure1, echo=FALSE, out.width='60%', fig.cap= "Age at Length sea urchin"}
+knitr::include_graphics('Figuras/ageatlength.jpg')
+```
+
 Ahora identifico los distintos cuantiles de los datos de pesquería y estaciones
 
 ```{r warning=FALSE}

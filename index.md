@@ -2,7 +2,7 @@
 title: "Indice de Reclutamiento  Erizo X y XI regiones "
 subtitle: "Análisis complementario Seguimiento Bentónico 1996-2022"
 author: "Mauricio Mardones. Inv. Depto Ev. Recursos. IFOP"
-date:  "07 October, 2023"
+date:  "09 October, 2023"
 #bibliography: LBSPR.bib
 #csl: apa.csl
 link-citations: yes
@@ -403,6 +403,13 @@ tallasegpo
 
 El promedio de un 10% de los quantiles de entrada a la fracción explotable es de `56 mm`.
 
+Esto corrsponde a un rango de edades entre 1.5 y 2 años como idica la Figure \@ref(fig:Figure1).
+
+<div class="figure" style="text-align: center">
+<img src="Figuras/ageatlength.jpg" alt="Age at Length sea urchin" width="60%" />
+<p class="caption">(\#fig:Figure1)Age at Length sea urchin</p>
+</div>
+
 Ahora identifico los distintos cuantiles de los datos de pesquería y estaciones
 
 
@@ -766,6 +773,7 @@ indref3
 ```
 
 <img src="Figuras/unnamed-chunk-30-1.jpeg" style="display: block; margin: auto;" />
+
 Por sector polar
 
 
