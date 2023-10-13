@@ -672,6 +672,7 @@ recoscref
 ```
 Grafico como Oscilación por Zona
 
+
 ```{r message=F, warning=F}
 recosczoref <- ggplot(indice_recl_ref  %>% 
   group_by(year,macrozona) %>%
