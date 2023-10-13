@@ -575,7 +575,7 @@ indref3 <- ggplot(indice_recl_ref  %>%
   scale_fill_manual(values = c("black", "red"),
                     labels = c("Negativo", "Positivo"),
                     name="IR Erizo REF") +
-  facet_wrap(.~sector, ncol=10) +
+  facet_wrap(.~sector, ncol=7) +
   geom_hline(yintercept = 0, color = "red")+
   scale_x_discrete(breaks = seq(from = 1996, to = 2022, by = 4))+
   theme_few()+
